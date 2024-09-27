@@ -1,11 +1,30 @@
 const admin = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
-const serviceAccount = require('C:/Users/Asus/Desktop/driveshare-c4036-firebase-adminsdk-ypjci-068a3340f0.json'); // Replace with the correct path to your service account key file
+const Account = require('C:/Users/Asus/Desktop/driveshare-c4036-firebase-adminsdk-ypjci-9c4f35c9a6.json'); // Replace with the correct path to your service account key file
 const cors = require('cors'); // Import the cors package
+require('dotenv').config();
+// const Acc = process.env.cert
+//use process.env to create a json object in the index file by trigerring each property by processenv.propertyname
+console.log(process.env)
+// const y=JSON.parse(process.env.private_key)
+const x={
+  "type":`${process.env.type}`,
+  "project_id": `${process.env.project_id}`,
+  "private_key_id": `${process.env.private_key_id}`,
+  "private_key":`${process.env.private_key}`,
+  "client_email": `${process.env.client_email}`,
+  "client_id": `${process.env.client_id}`,
+  "auth_uri": `${process.env.auth_uri}`,
+  "token_uri": `${process.env.token_uri}`,
+  "auth_provider_x509_cert_url": `${process.env.auth_provider_x509_cert_url}`,
+  "client_x509_cert_url":`${process.env.client_x509_cert_url}`,
+  "universe_domain": `${process.env.universe_domain}`
 
+
+}
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(x),
   databaseURL: 'https://driveshare-c4036-default-rtdb.firebaseio.com', // Replace with your Firebase Realtime Database URL, if you're using it
 });
 const app = express();
